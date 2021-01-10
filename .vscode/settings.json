@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "vector": "cpp"
+    },
+    "cmake.debugConfig": {
+        "args": [
+            "../example.mp4",
+            "1280",
+            "100",
+            "75",
+            "100"
+        ]
+    }
+}
