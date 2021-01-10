@@ -12,7 +12,14 @@ Mat extractRegionFromFrame(
     const int &padding
 );
 
-
+/**
+ * @brief Construct a new Object Tracker:: Object Tracker object    
+ * 
+ * @param xPos X position of region of interest centroid
+ * @param yPos Y position of region of interest centroid
+ * @param roiPadding Padding around the centroid to generate square for ROI
+ * @param regionPadding Padding around the ROI to use as a search space
+ */
 ObjectTracker::ObjectTracker(int xPos,
                              int yPos,
                              int roiPadding,
@@ -24,6 +31,12 @@ ObjectTracker::ObjectTracker(int xPos,
     this->regionPadding = regionPadding;
 }
 
+/**
+ * @brief Initialises the object tracker, with the starting frame the will be
+ * used to extract the region of interest
+ * 
+ * @param frame The starting frame to extract the region of inteste from
+ */
 void ObjectTracker::initialise(const Mat& frame)
 {
     cvtColor(frame, this->frame, COLOR_RGB2GRAY);
@@ -36,11 +49,20 @@ void ObjectTracker::initialise(const Mat& frame)
     this->yTracked = this->yPos;
 }
 
+/**
+ * @brief Sets the next frame to be analysed
+ * 
+ * @param frame Next frame to be analysed
+ */
 void ObjectTracker::setNextFrame(const Mat& frame)
 {
     cvtColor(frame, this->frame, COLOR_RGB2GRAY);
 }
 
+/**
+ * @brief Tracks the region of interest in the currently loaded frame
+ * 
+ */
 void ObjectTracker::trackROI()
 {
     Mat proposedRegion, difference, bestRegion;
@@ -72,7 +94,7 @@ void ObjectTracker::trackROI()
             if ( roiMean < lowestMean )
             {
                 lowestMean = roiMean;
-                bestRegion = proposedRegion.clone();
+                // bestRegion = proposedRegion.clone();
                 if ( abs(this->xTracked - x) < 5 )
                 {
                     this->xTracked = x;
@@ -87,6 +109,15 @@ void ObjectTracker::trackROI()
     // this->roi = bestRegion;
 }
 
+/**
+ * @brief Extracts region of interest from a frame
+ * 
+ * @param frame Input frame
+ * @param xPos X position of region centroid
+ * @param yPos Y position of region centroid
+ * @param padding Padding around centroid to generate square
+ * @return Mat Cropped region of interest from frame
+ */
 Mat extractRegionFromFrame(
     const Mat &frame,
     const int &xPos,

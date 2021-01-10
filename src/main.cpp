@@ -20,19 +20,20 @@ int main(int argc, char *argv[])
     int roiPadding = stoi(argv[4]);
     int regionPadding = stoi(argv[5]);
 
-    VideoCapture video(filename);
     Mat frame;
     int frameNumber = 0;
-    video >> frame;
+
+    VideoCapture video(filename);
 
     if (!video.isOpened())
     {
         cout << "Error opening video file" << endl;
         return -1;
     }
+
+    video >> frame;
     ObjectTracker tracker = ObjectTracker(xPos, yPos, roiPadding, regionPadding);
     tracker.initialise(frame);
-
 
     namedWindow("Image", WINDOW_AUTOSIZE);
 
