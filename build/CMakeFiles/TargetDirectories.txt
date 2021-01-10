@@ -1,3 +1,0 @@
-/Users/iuddin/Documents/Github/object-tracking-cpp/build/CMakeFiles/rebuild_cache.dir
-/Users/iuddin/Documents/Github/object-tracking-cpp/build/CMakeFiles/edit_cache.dir
-/Users/iuddin/Documents/Github/object-tracking-cpp/build/CMakeFiles/TrackObject.dir
