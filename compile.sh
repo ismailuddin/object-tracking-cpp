@@ -9,4 +9,4 @@ fi
 cmake ..
 cmake --build .
 cd ..
-./build/TrackObject ./example.mp4 1285 125 125 35
+./build/ObjectTracker ./example.mp4 1285 125 125 35
