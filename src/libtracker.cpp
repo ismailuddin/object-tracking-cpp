@@ -9,8 +9,7 @@ Mat extractRegionFromFrame(
     const Mat &frame,
     const int &xPos,
     const int &yPos,
-    const int &padding
-);
+    const int &padding);
 
 /**
  * @brief Construct a new Object Tracker:: Object Tracker object    
@@ -37,13 +36,13 @@ ObjectTracker::ObjectTracker(int xPos,
  * 
  * @param frame The starting frame to extract the region of inteste from
  */
-void ObjectTracker::initialise(const Mat& frame)
+void ObjectTracker::initialise(const Mat &frame)
 {
     cvtColor(frame, this->frame, COLOR_RGB2GRAY);
     this->roi = extractRegionFromFrame(this->frame,
-                                        this->xPos,
-                                        this->yPos,
-                                        this->roiPadding);
+                                       this->xPos,
+                                       this->yPos,
+                                       this->roiPadding);
     // this->nextFrame = nextFrame;
     this->xTracked = this->xPos;
     this->yTracked = this->yPos;
@@ -54,7 +53,7 @@ void ObjectTracker::initialise(const Mat& frame)
  * 
  * @param frame Next frame to be analysed
  */
-void ObjectTracker::setNextFrame(const Mat& frame)
+void ObjectTracker::setNextFrame(const Mat &frame)
 {
     cvtColor(frame, this->frame, COLOR_RGB2GRAY);
 }
@@ -80,8 +79,7 @@ void ObjectTracker::trackROI()
                 x - this->roiPadding < 0 ||
                 y - this->roiPadding < 0 ||
                 x + this->roiPadding > this->frame.cols ||
-                y + this->roiPadding > this->frame.rows
-            )
+                y + this->roiPadding > this->frame.rows)
             {
                 continue;
             }
@@ -91,15 +89,15 @@ void ObjectTracker::trackROI()
                                                     this->roiPadding);
             absdiff(this->roi, proposedRegion, difference);
             roiMean = mean(difference)[0];
-            if ( roiMean < lowestMean )
+            if (roiMean < lowestMean)
             {
                 lowestMean = roiMean;
                 // bestRegion = proposedRegion.clone();
-                if ( abs(this->xTracked - x) < 5 )
+                if (abs(this->xTracked - x) < 5)
                 {
                     this->xTracked = x;
                 }
-                if ( abs(this->yTracked - y) < 5 )
+                if (abs(this->yTracked - y) < 5)
                 {
                     this->yTracked = y;
                 }
